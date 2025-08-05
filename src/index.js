@@ -5,15 +5,23 @@ const handlebars=require('express-handlebars')
 const app = express()
 const port = 3000
 
+const route = require('./routes')
+
+app.use(express.urlencoded())
+app.use(express.json())
+
 app.use(morgan('combined'))
 app.engine('handlebars', handlebars.engine());
 app.set('view engine', 'handlebars');
 app.set('views',path.join(__dirname, 'resources', 'views')
 )
 app.use(express.static(path.join(__dirname,'/public')))
-app.get('/', (req, res) => {
-  res.render('home');
-})
+
+
+route(app)
+
+
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
