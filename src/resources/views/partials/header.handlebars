@@ -7,32 +7,14 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Trang chủ</a>
+          <a class="nav-link active" aria-current="page" href="/home">Trang chủ</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Thể Loại</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Tủ Mượn</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Giỏ Mượn</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Yêu Thích</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Thông Báo</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Góp Ý</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Đăng Xuất</a>
+          <a class="nav-link active" aria-current="page" href="/home/create">Thêm</a>
         </li>
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+      <form class="d-flex" role="search" method="get" action="/home/search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="name"/>
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
     </div>
