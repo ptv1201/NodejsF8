@@ -3,14 +3,28 @@
   <div class="col-md-4 mb-4">
     <div class="card">
       <div class="ratio ratio-16x9">
-        <img src="{{this.imagine}}" 
-             class="card-img-top" 
-             style="object-fit: cover;" 
-             alt="{{this.name}}">
+        <img src="{{this.imagine}}" class="card-img-top" style="object-fit: cover;" alt="{{this.name}}">
       </div>
       <div class="card-body">
         <h5 class="card-title">{{this.name}}</h5>
         <a href="/courses/{{this._id}}" class="btn btn-primary">View</a>
+        <a href="/courses/update/{{this._id}}" class="btn btn-primary">Update</a>
+        <a data-bs-toggle="modal" data-bs-target="#{{this._id}}" class="btn btn-primary">Delete</a>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="{{this._id}}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          Xóa <b>{{this.name}}</b>?
+        </div>
+        <div class="modal-footer">
+          <form action="/courses/delete/{{this._id}}" method="POST">
+            <button type="submit" class="btn btn-danger">Xóa</button>
+          </form>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+        </div>
       </div>
     </div>
   </div>

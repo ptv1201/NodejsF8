@@ -1,12 +1,12 @@
-const path=require('path')
+const path = require('path')
 const express = require('express')
 const morgan = require('morgan')
-const handlebars=require('express-handlebars')
+const handlebars = require('express-handlebars')
 const app = express()
 const port = 3000
 
 const route = require('./routes')
-const db= require('./config/db')
+const db = require('./config/db')
 
 app.use(express.urlencoded())
 app.use(express.json())
@@ -17,9 +17,9 @@ db.connect()
 app.use(morgan('combined'))
 app.engine('handlebars', handlebars.engine());
 app.set('view engine', 'handlebars');
-app.set('views',path.join(__dirname, 'resources', 'views')
+app.set('views', path.join(__dirname, 'resources', 'views')
 )
-app.use(express.static(path.join(__dirname,'public')))
+app.use(express.static(path.join(__dirname, 'public')))
 
 
 route(app)

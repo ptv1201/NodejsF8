@@ -1,11 +1,11 @@
 <div class="container mt-4">
-    <form method="post" action="/home/add">
+    <form method="post" action="/courses/updated/{{course._id}}">
         <div class="mb-3">
             <label class="form-label">Name</label>
-            <input type="text" class="form-control" name="name">
+            <input type="text" class="form-control" name="name" value={{course.name}}>
 
             <label class="form-label">Video</label>
-            <input type="text" class="form-control" name="video">
+            <input type="text" class="form-control" name="video" value={{course.video}}>
         </div>
 
         <button type="submit" class="btn btn-primary">Gửi</button>
