@@ -27,7 +27,7 @@ class HomeController {
       const course = new Course(body)
       course.save()
          .then(() => {
-            res.redirect('/home')
+            res.redirect('/')
          })
          .catch(() => {
             res.send("failed!!");

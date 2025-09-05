@@ -21,12 +21,12 @@ class coursesController {
         const body = req.body
         body.imagine = `https://i.ytimg.com/vi/${body.video}/hqdefault.jpg`
         Course.findByIdAndUpdate(req.params.slug, body, { new: true })
-            .then(() => res.redirect('/home'))
+            .then(() => res.redirect('/'))
             .catch(() => res.send(failed))
     }
     delete(req, res) {
         Course.findByIdAndDelete(req.params.slug)
-            .then(() => res.redirect('/home'))
+            .then(() => res.redirect('/'))
             .catch(() => res.send('failed'))
     }
 }
