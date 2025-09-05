@@ -1,8 +1,11 @@
 const mongoose = require('mongoose')
+require('dotenv').config();
+
+const mongoURI = process.env.MONGODB_URI;
 
 async function connect(){
 try {
-     await mongoose.connect('mongodb+srv://ptv1201:hpvbo1201@nodejsf8.r9cyai2.mongodb.net/?retryWrites=true&w=majority&appName=NodejsF8')
+     await mongoose.connect(mongoURI)
      console.log('connect successfully')
 } catch (error) {
     console.log('connect faile')

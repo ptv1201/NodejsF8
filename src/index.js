@@ -1,9 +1,10 @@
+require('dotenv').config();
 const path = require('path')
 const express = require('express')
 const morgan = require('morgan')
 const handlebars = require('express-handlebars')
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000;
 
 const route = require('./routes')
 const db = require('./config/db')
@@ -27,6 +28,6 @@ route(app)
 
 
 
-app.listen(port, '0.0.0.0',() => {
+app.listen(port,() => {
   console.log(`app listening on port ${port}`)
 })
