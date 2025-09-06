@@ -68,11 +68,6 @@
   editor.addEventListener("input", function () {
     hidden.value = editor.innerHTML.trim();
   });
-
-  // Đảm bảo khi submit vẫn copy lại lần cuối
-  form.addEventListener("submit", function () {
-    hidden.value = editor.innerHTML;
-  });
 </script>
 
 
