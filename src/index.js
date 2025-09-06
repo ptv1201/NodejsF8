@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000;
 const route = require('./routes')
 const db = require('./config/db')
 
-app.use(express.urlencoded())
+app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 //connect to db

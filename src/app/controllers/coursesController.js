@@ -29,5 +29,16 @@ class coursesController {
             .then(() => res.redirect('/'))
             .catch(() => res.send('failed'))
     }
+
+    saveNote(req, res) {
+        // res.json(req.body)
+        if (req.body.note!=""){
+             Course.findByIdAndUpdate(req.params.slug, req.body, { new: true })
+            .then(course => res.redirect(`/courses/${req.params.slug}`))
+            .catch(() => res.send(failed))
+        }
+        else res.redirect(`/courses/${req.params.slug}`)
+       
+    }
 }
 module.exports = new coursesController

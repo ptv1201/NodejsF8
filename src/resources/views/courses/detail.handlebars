@@ -1,2 +1,82 @@
 <h2>{{course.name}}</h2>
-<iframe class="col-md-12" style="height: 650px;" src="https://www.youtube.com/embed/{{course.video}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe class="col-md-12" style="height: 650px;" src="https://www.youtube.com/embed/{{course.video}}"
+    title="YouTube video player" frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+
+<form action="/courses/save/{{course._id}}" method="POST">
+    <!-- Toolbar -->
+    <div class="toolbar">
+        <button type="button" onclick="format('bold')"><b>B</b></button>
+        <button type="button" onclick="format('italic')"><i>I</i></button>
+        <button type="button" onclick="format('underline')"><u>U</u></button>
+        <!-- Chọn màu chữ -->
+        <label for="textColor">🎨</label>
+        <input type="color" id="textColor" value="#000000" onclick="setTextColor(this.value)"
+            oninput="setTextColor(this.value)">
+
+        <!-- Chọn màu nền -->
+        <label for="bgColor">🖌</label>
+        <input type="color" id="bgColor" value="#ffff00" onclick="setBgColor(this.value)"
+            oninput="setBgColor(this.value)">
+    </div>
+
+    <!-- Vùng soạn thảo -->
+    <div id="editor" class="editor" contenteditable="true">
+        {{{course.note}}}
+    </div>
+
+    <!-- Hidden input để gửi dữ liệu -->
+    <input type="hidden" name="note" id="hiddenNote"> 
+
+    <button type="submit">Lưu</button>
+</form>
+
+<script>
+    let isTextColored = false;
+    let isBgColored = false;
+    function format(command) {
+        document.execCommand(command, false, null);
+    }
+    function setTextColor(color) {
+        if (!isTextColored) {
+            document.execCommand("foreColor", false, color);
+            isTextColored = true;
+        } else {
+            document.execCommand("removeFormat", false, null);
+            isTextColored = false;
+        }
+    }
+    function setBgColor(color) {
+        if (!isBgColored) {
+            document.execCommand("hiliteColor", false, color);
+            isBgColored = true;
+        } else {
+            document.execCommand("removeFormat", false, null);
+            isBgColored = false;
+        }
+    }
+</script>
+<script>
+  const editor = document.getElementById("editor");
+  const hidden = document.getElementById("hiddenNote");
+  const form = document.querySelector("form");
+  // Đồng bộ mỗi khi gõ chữ
+  editor.addEventListener("input", function () {
+    hidden.value = editor.innerHTML.trim();
+  });
+
+  // Đảm bảo khi submit vẫn copy lại lần cuối
+  form.addEventListener("submit", function () {
+    hidden.value = editor.innerHTML;
+  });
+</script>
+
+
+{{!-- <form action="/courses/save/{{course._id}}" method="POST">
+<textarea name="note">{{course.note}}</textarea>
+<button type="submit">save</button>
+</form> --}}
