@@ -20,6 +20,10 @@ class coursesController {
     updated(req, res) {
         const body = req.body
         body.imagine = `https://i.ytimg.com/vi/${body.video}/hqdefault.jpg`
+        body.nomalizeName = body.name
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .toLowerCase()
         Course.findByIdAndUpdate(req.params.slug, body, { new: true })
             .then(() => res.redirect('/'))
             .catch(() => res.send(failed))
@@ -32,13 +36,13 @@ class coursesController {
 
     saveNote(req, res) {
         // res.json(req.body)
-        if (req.body.note!=""){
-             Course.findByIdAndUpdate(req.params.slug, req.body, { new: true })
-            .then(course => res.redirect(`/courses/${req.params.slug}`))
-            .catch(() => res.send(failed))
+        if (req.body.note != "") {
+            Course.findByIdAndUpdate(req.params.slug, req.body, { new: true })
+                .then(course => res.redirect(`/courses/${req.params.slug}`))
+                .catch(() => res.send(failed))
         }
         else res.redirect(`/courses/${req.params.slug}`)
-       
+
     }
 }
 module.exports = new coursesController

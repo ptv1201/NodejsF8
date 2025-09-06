@@ -6,5 +6,6 @@ const Course = new Schema({
     imagine: String, 
     video: String,
     note: String,
+    nomalizeName: String,
 })
 module.exports = mongoose.model('Course',Course)

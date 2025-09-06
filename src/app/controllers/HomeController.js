@@ -10,9 +10,13 @@ class HomeController {
          })
          .catch(next)
    }
-   search(req, res, next) {
+   search(req, res, next) { // bỏ qua dấu tiếng việt bỏ qua in thường in hoa, include
       const keyword = req.query.name
-      Course.find({ name: keyword }).lean()
+      const nomalizeKeyWord = keyword
+         .normalize('NFD')
+         .replace(/[\u0300-\u036f]/g, '')
+         .toLowerCase()
+      Course.find({ nomalizeName: { $regex: nomalizeKeyWord, $options: "i" } }).lean()
          .then(courses => {
             res.render('courses/search', { courses })
          })
@@ -24,6 +28,10 @@ class HomeController {
    add(req, res) {
       const body = req.body
       body.imagine = `https://i.ytimg.com/vi/${body.video}/hqdefault.jpg`
+      body.nomalizeName = body.name
+         .normalize('NFD')
+         .replace(/[\u0300-\u036f]/g, '')
+         .toLowerCase()
       const course = new Course(body)
       course.save()
          .then(() => {
